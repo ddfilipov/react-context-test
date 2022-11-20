@@ -25,19 +25,31 @@ const Container = styled.div`
 
 export const MainContainer = () => {
     const [totalClicks, settotalClicks] = useState<number>(0);
+    const [clicksA, setClicksA] = useState<number>(0);
+    const [clicksB, setClicksB] = useState<number>(0);
+    const [clicksC, setClicksC] = useState<number>(0);
 
-    const clicky = () => {
+    const clickA = () => {
+        setClicksA(clicksA + 1);
+        settotalClicks(totalClicks + 1);
+    };
+    const clickB = () => {
+        setClicksB(clicksB + 1);
+        settotalClicks(totalClicks + 1);
+    };
+    const clickC = () => {
+        setClicksC(clicksC + 1);
         settotalClicks(totalClicks + 1);
     };
 
     return (
         <Wrapper>
             <p>Clicks: {totalClicks}</p>
-            <button onClick={clicky}>Click to increase total clicks</button>
+            <button onClick={() => settotalClicks(totalClicks + 1)}>Click to increase total clicks</button>
             <Container>
-                <FatherCounter />
-                <FatherCounter />
-                <FatherCounter />
+                <FatherCounter clickFunction={clickA} numberOfClicks={clicksA} name={"Counter 1"} />
+                <FatherCounter clickFunction={clickB} numberOfClicks={clicksB} name={"Counter 2"} />
+                <FatherCounter clickFunction={clickC} numberOfClicks={clicksC} name={"Counter 3"} />
             </Container>
         </Wrapper>
     );

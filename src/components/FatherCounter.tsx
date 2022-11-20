@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -5,6 +6,19 @@ const Container = styled.div`
     min-height: 300px;
     min-width: 300px;
 `;
-export const FatherCounter = () => {
-    return <Container>Father Component</Container>;
+
+interface FatherCounterProps {
+    numberOfClicks: number;
+    clickFunction: () => void;
+    name: string;
+}
+
+export const FatherCounter: FC<FatherCounterProps> = ({ clickFunction, numberOfClicks, name }) => {
+    return (
+        <Container>
+            <h2>{name}</h2>
+            <p>Clicks: {numberOfClicks}</p>
+            <button onClick={clickFunction}>Click me</button>
+        </Container>
+    );
 };
