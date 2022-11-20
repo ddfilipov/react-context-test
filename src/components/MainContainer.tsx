@@ -1,6 +1,6 @@
 import { FatherCounter } from "./FatherCounter";
 import styled from "styled-components";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -23,6 +23,8 @@ const Container = styled.div`
     border: 1px solid black;
 `;
 
+export const MyContext = createContext<number | undefined>(undefined);
+
 export const MainContainer = () => {
     const [totalClicks, settotalClicks] = useState<number>(0);
     const [clicksA, setClicksA] = useState<number>(0);
@@ -43,14 +45,16 @@ export const MainContainer = () => {
     };
 
     return (
-        <Wrapper>
-            <p>Clicks: {totalClicks}</p>
-            <button onClick={() => settotalClicks(totalClicks + 1)}>Click to increase total clicks</button>
-            <Container>
-                <FatherCounter clickFunction={clickA} numberOfClicks={clicksA} name={"Counter 1"} />
-                <FatherCounter clickFunction={clickB} numberOfClicks={clicksB} name={"Counter 2"} />
-                <FatherCounter clickFunction={clickC} numberOfClicks={clicksC} name={"Counter 3"} />
-            </Container>
-        </Wrapper>
+        <MyContext.Provider value={totalClicks}>
+            <Wrapper>
+                <p>Clicks: {totalClicks}</p>
+                <button onClick={() => settotalClicks(totalClicks + 1)}>Click to increase total clicks</button>
+                <Container>
+                    <FatherCounter clickFunction={clickA} numberOfClicks={clicksA} name={"Counter 1"} />
+                    <FatherCounter clickFunction={clickB} numberOfClicks={clicksB} name={"Counter 2"} />
+                    <FatherCounter clickFunction={clickC} numberOfClicks={clicksC} name={"Counter 3"} />
+                </Container>
+            </Wrapper>
+        </MyContext.Provider>
     );
 };

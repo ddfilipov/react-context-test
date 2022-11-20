@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
+import { MyContext } from "./MainContainer";
 
 const Container = styled.div`
     border: 1px solid blue;
@@ -14,10 +15,13 @@ interface FatherCounterProps {
 }
 
 export const FatherCounter: FC<FatherCounterProps> = ({ clickFunction, numberOfClicks, name }) => {
+    const totalClicksContext = useContext(MyContext);
+
     return (
         <Container>
             <h2>{name}</h2>
-            <p>Clicks: {numberOfClicks}</p>
+            <p>Total Clicks: {totalClicksContext}</p>
+            <p>Component Clicks: {numberOfClicks}</p>
             <button onClick={clickFunction}>Click me</button>
         </Container>
     );
