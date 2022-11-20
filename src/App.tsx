@@ -1,7 +1,7 @@
-import { FatherCounter } from "./components/FatherCounter";
+import { MainContainer } from "./components/MainContainer";
 
 function App() {
-    return <FatherCounter></FatherCounter>;
+    return <MainContainer />;
 }
 
 export default App;
